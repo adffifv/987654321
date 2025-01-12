@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    padding: 0;
+background-color: #eee;
+}
+*{
+    box-sizing: border-box;
+}
+
+th{
+    background-color: aliceblue !important;
+}
+
+/* 子菜单项的背景色（可选，用于子菜单内的菜单项） */
+.sub-menu .el-menu-item {
+    background-color: #F2F2F2 !important; /* 浅灰色背景，与标题稍有区别 */
+}
