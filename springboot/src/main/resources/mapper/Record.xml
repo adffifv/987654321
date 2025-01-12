@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.RecordMapper">
+
+
+
+    <select id="listByCondition" resultType="com.example.springboot.entity.Record">
+        select * from  record
+        <where>
+            <if test="doctorName != null and doctorName != '' ">
+                doctor_name like concat('%',#{ doctorName },'%')
+            </if>
+            <if test="userName != null and userName != '' ">
+                and user_name like concat('%',#{ userName },'%')
+            </if>
+            <if test="userId != null and userId != '' ">
+                and user_id like concat('%',#{ userId },'%')
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="listReturByCondition" resultType="com.example.springboot.entity.Retur">
+        select * from  retur
+        <where>
+            <if test="doctorName != null and doctorName != '' ">
+                doctor_name like concat('%',#{ doctorName },'%')
+            </if>
+            <if test="userName != null and userName != '' ">
+                and user_name like concat('%',#{ userName },'%')
+            </if>
+            <if test="userId != null and userId != '' ">
+                and user_id like concat('%',#{ userId },'%')
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+    <insert id="saveRetur">
+        insert into retur ( doctor_name,user_id,user_name,user_phone,category,score,doctor_id,account,status,descripe)
+        values(#{doctorName},#{userId},#{userName} ,#{userPhone},#{category},#{score} ,#{doctorId},#{account},#{status},#{descripe})
+    </insert>
+
+    <insert id="save">
+        insert into record ( doctor_name,user_id,user_name,user_phone,category,score,doctor_id,account)
+        values(#{doctorName},#{userId},#{userName} ,#{userPhone},#{category},#{score} ,#{doctorId},#{account})
+    </insert>
+
+    <update id="updateById">
+        update record set doctor_name =#{doctorName}, user_id=#{userId},user_name=#{userName} ,category=#{category},user_phone=#{userPhone},score=#{score},
+                          updatetime=#{updatetime} ,account=#{account},status=#{status} where id=#{id}
+    </update>
+
+    <update id="updateStatus">
+        update record set status=#{status} where id=#{id}
+    </update>
+
+
+    <delete id="deleteById">
+        delete  from record where id = #{id}
+    </delete>
+
+    <delete id="deleteReturById">
+        delete  from retur where id = #{id}
+    </delete>
+
+    <select id="list" resultType="com.example.springboot.entity.Record">
+        select * from record order by id desc
+    </select>
+
+    <select id="getById" resultType="com.example.springboot.entity.Record">
+        select * from  record where id = #{id}
+    </select>
+
+
+
+</mapper>
